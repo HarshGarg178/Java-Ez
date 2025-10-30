@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Fundamentals - Complete Interview Guide for SDET</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            border-left: 4px solid #667eea;
+        }
+
+        .toc h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .toc ul {
+            list-style: none;
+            columns: 2;
+            column-gap: 40px;
+        }
+
+        .toc li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .toc li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .toc a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.4em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .section h4 {
+            color: #555;
+            font-size: 1.1em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .section strong {
+            color: #764ba2;
+        }
+
+        code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.6;
+            border-left: 4px solid #667eea;
+        }
+
+        pre code {
+            background: none;
+            color: #f8f8f2;
+            padding: 0;
+        }
+
+        .keyword { color: #ff79c6; }
+        .string { color: #f1fa8c; }
+        .comment { color: #6272a4; }
+        .class-name { color: #8be9fd; }
+        .method { color: #50fa7b; }
+        .number { color: #bd93f9; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .note {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .note strong {
+            color: #1976d2;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning strong {
+            color: #856404;
+        }
+
+        .example-box {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .example-box strong {
+            color: #764ba2;
+        }
+
+        .comparison-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #667eea;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .questionnaire {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 30px;
+            margin-top: 50px;
+            border-radius: 8px;
+        }
+
+        .questionnaire h2 {
+            color: #2e7d32;
+            border-bottom: 2px solid #4caf50;
+        }
+
+        .question {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #4caf50;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-number {
+            color: #2e7d32;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            color: #333;
+            font-size: 1.05em;
+            margin-bottom: 10px;
+        }
+
+        .question-hint {
+            color: #666;
+            font-size: 0.95em;
+            font-style: italic;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+        }
+
+        .back-to-top {
+            display: inline-block;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #667eea;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 50px;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            background: #764ba2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .toc ul {
+                columns: 1;
+            }
+
+            pre {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>☕ Java Fundamentals - SDET Edition</h1>
+            <p>Complete Interview Guide with Advanced Topics & Questionnaire</p>
+        </div>
+
+        <div class="content">
+            <!-- Table of Contents -->
+            <div class="toc">
+                <h2>📚 Table of Contents</h2>
+                <ul>
+                    <li><a href="#section1">Basic Class Structure & Main Method</a></li>
+                    <li><a href="#section2">Loops in Java</a></li>
+                    <li><a href="#section3">Arrays in Java</a></li>
+                    <li><a href="#section4">Object-Oriented Programming (OOP)</a></li>
+                    <li><a href="#section5">Polymorphism (Overloading & Overriding)</a></li>
+                    <li><a href="#section6">Abstract Classes vs Interfaces</a></li>
+                    <li><a href="#section7">Enums in Java</a></li>
+                    <li><a href="#section8">Data Types</a></li>
+                    <li><a href="#section9">Wrapper Classes</a></li>
+                    <li><a href="#section10">Strings and Mutability</a></li>
+                    <li><a href="#section11">Errors & Exceptions</a></li>
+                    <li><a href="#section12">File Handling</a></li>
+                    <li><a href="#section13">Collections Framework</a></li>
+                    <li><a href="#section14">Interview Questionnaire</a></li>
+                </ul>
+            </div>
+
+            <!-- Section 1 -->
+            <div class="section" id="section1">
+                <h2>1. Basic Class Structure & Main Method</h2>
+
+                <h3>What is a Class?</h3>
+                <p>A <strong>class</strong> is a blueprint or template that defines the structure and behavior (properties and methods) of objects. It's the fundamental building block of Java programs.</p>
+
+                <h3>Basic Class Syntax</h3>
+                <pre><code><span class="keyword">public class</span> <span class="class-name">MyClass</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
+        <span class="class-name">System</span>.out.println(<span class="string">"Hello, World!"</span>);
+    }
+}</code></pre>
+
+                <h3>Understanding <code>public static void main(String[] args)</code></h3>
+                <p>This is the <strong>exact signature</strong> the JVM (Java Virtual Machine) looks for to start your program. <strong>Every part is mandatory.</strong></p>
+
+                <h4>Why <code>public</code>?</h4>
+                <p>Makes the method accessible to the JVM, which is outside your class. Without <code>public</code>, the JVM cannot access the method to start your program.</p>
+
+                <h4>Why <code>static</code>?</h4>
+                <p>Allows the method to run <strong>without creating an object</strong> of the class. The JVM calls <code>main</code> directly on the class itself.</p>
+
+                <h4>Why <code>void</code>?</h4>
+                <p>Specifies that <code>main</code> does not return any value to the JVM.</p>
+
+                <h4>Why <code>String[] args</code>?</h4>
+                <p><strong>It's an array of String objects</strong>. Receives command-line arguments when running the program. If no arguments are provided, the array is <strong>empty but not null.</strong></p>
+
+                <div class="note">
+                    <strong>📌 Critical Distinction:</strong> <strong>Empty array</strong> (length 0, exists in memory) vs <strong>Null array</strong> (no array object exists).
+                </div>
+
+                <pre><code><span class="comment">// Empty array - array EXISTS with 0 elements</span>
+<span class="class-name">String</span>[] arr = <span class="keyword">new</span> <span class="class-name">String</span>[0];
+<span class="class-name">System</span>.out.println(arr.length);  <span class="comment">// 0</span>
+
+<span class="comment">// Null array - NO array object exists</span>
+<span class="class-name">String</span>[] arr2 = <span class="keyword">null</span>;
+<span class="class-name">System</span>.out.println(arr2 == <span class="keyword">null</span>);  <span class="comment">// true</span></code></pre>
+            </div>
+
+            <!-- Section 2: Loops -->
+            <div class="section" id="section2">
+                <h2>2. Loops in Java</h2>
+
+                <p>Loops are used to execute a block of code repeatedly based on a condition. Java provides four types of loops.</p>
+
+                <h3>1. For Loop</h3>
+                <p><strong>Used for:</strong> When you know the number of iterations in advance.</p>
+
+                <h4>Basic For Loop</h4>
+                <pre><code><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < <span class="number">5</span>; i++) {
+    <span class="class-name">System</span>.out.println(<span class="string">"Iteration: "</span> + i);
+}</code></pre>
+
+                <p><strong>Syntax Breakdown:</strong></p>
+                <ul>
+                    <li><strong>Initialization:</strong> <code>int i = 0</code> - runs once before loop starts</li>
+                    <li><strong>Condition:</strong> <code>i < 5</code> - checked before each iteration</li>
+                    <li><strong>Increment:</strong> <code>i++</code> - executed after each iteration</li>
+                </ul>
+
+                <h4>Enhanced For Loop (For-Each)</h4>
+                <p>Used to iterate over arrays and collections without index management.</p>
+
+                <pre><code><span class="keyword">int</span>[] numbers = {<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>};
+
+<span class="keyword">for</span> (<span class="keyword">int</span> num : numbers) {
+    <span class="class-name">System</span>.out.println(num);
+}
+
+<span class="comment">// Iterating over ArrayList</span>
+<span class="class-name">ArrayList</span>&lt;<span class="class-name">String</span>&gt; fruits = <span class="keyword">new</span> <span class="class-name">ArrayList</span>&lt;&gt;();
+fruits.<span class="method">add</span>(<span class="string">"Apple"</span>);
+fruits.<span class="method">add</span>(<span class="string">"Banana"</span>);
+
+<span class="keyword">for</span> (<span class="class-name">String</span> fruit : fruits) {
+    <span class="class-name">System</span>.out.println(fruit);
+}</code></pre>
+
+                <p><strong>Advantages:</strong> Cleaner syntax, no index management, fewer errors.</p>
+
+                <h3>2. While Loop</h3>
+                <p><strong>Used for:</strong> When you don't know the number of iterations. Continues while condition is true.</p>
+
+                <pre><code><span class="keyword">int</span> i = <span class="number">0</span>;
+<span class="keyword">while</span> (i < <span class="number">5</span>) {
+    <span class="class-name">System</span>.out.println(<span class="string">"Value: "</span> + i);
+    i++;
+}</code></pre>
+
+                <div class="warning">
+                    <strong>⚠️ Warning:</strong> If the condition is always true, you get an <strong>infinite loop</strong>. Make sure the condition will eventually become false.
+                </div>
+
+                <h3>3. Do-While Loop</h3>
+                <p><strong>Used for:</strong> When you want to execute code at least once, even if condition is false. Condition is checked at the end.</p>
+
+                <pre><code><span class="keyword">int</span> i = <span class="number">0</span>;
+<span class="keyword">do</span> {
+    <span class="class-name">System</span>.out.println(<span class="string">"Value: "</span> + i);
+    i++;
+} <span class="keyword">while</span> (i < <span class="number">5</span>);</code></pre>
+
+                <p><strong>Key Difference:</strong> Do-While loop body executes at least once; While loop may not execute at all if condition is false from start.</p>
+
+                <h3>4. Nested Loops</h3>
+                <p>A loop inside another loop. Commonly used for printing patterns or 2D arrays.</p>
+
+                <pre><code><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i <= <span class="number">3</span>; i++) {
+    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j <= <span class="number">3</span>; j++) {
+        <span class="class-name">System</span>.out.print(i + <span class="string">","</span> + j + <span class="string">" "</span>);
+    }
+    <span class="class-name">System</span>.out.println();
+}</code></pre>
+
+                <p><strong>Output:</strong></p>
+                <pre><code>1,1 1,2 1,3
+2,1 2,2 2,3
+3,1 3,2 3,3</code></pre>
+
+                <h3>Loop Control Statements</h3>
+
+                <h4>Break Statement</h4>
+                <p>Exits the loop immediately when a condition is met.</p>
+
+                <pre><code><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < <span class="number">10</span>; i++) {
+    <span class="keyword">if</span> (i == <span class="number">5</span>) {
+        <span class="keyword">break</span>;  <span class="comment">// Exits loop when i equals 5</span>
+    }
+    <span class="class-name">System</span>.out.println(i);
+}</code></pre>
+
+                <h4>Continue Statement</h4>
+                <p>Skips the current iteration and moves to the next one.</p>
+
+                <pre><code><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < <span class="number">5</span>; i++) {
+    <span class="keyword">if</span> (i == <span class="number">2</span>) {
+        <span class="keyword">continue</span>;  <span class="comment">// Skips when i equals 2</span>
+    }
+    <span class="class-name">System</span>.out.println(i);
+}</code></pre>
+
+                <p><strong>Output:</strong> 0, 1, 3, 4 (skips 2)</p>
+
+                <h3>Loop Comparison Table</h3>
+                <table>
+                    <tr>
+                        <th>Loop Type</th>
+                        <th>When to Use</th>
+                        <th>Condition Checked</th>
+                    </tr>
+                    <tr>
+                        <td>For</td>
+                        <td>Known number of iterations</td>
+                        <td>Before each iteration</td>
+                    </tr>
+                    <tr>
+                        <td>For-Each</td>
+                        <td>Iterate over collections/arrays</td>
+                        <td>Automatically managed</td>
+                    </tr>
+                    <tr>
+                        <td>While</td>
+                        <td>Unknown iterations, condition-based</td>
+                        <td>Before each iteration</td>
+                    </tr>
+                    <tr>
+                        <td>Do-While</td>
+                        <td>Must execute at least once</td>
+                        <td>After each iteration</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Section 3 -->
+            <div class="section" id="section3">
+                <h2>3. Arrays in Java</h2>
+
+                <h3>What are Arrays?</h3>
+                <p>Arrays are <strong>reference types</strong> that store multiple values of the <strong>same data type</strong> in a single variable. They have a <strong>fixed size</strong> once created and elements are accessed by <strong>index</strong> (0-based).</p>
+
+                <h3>Array Declaration Forms</h3>
+                <pre><code><span class="keyword">int</span>[] arr;
+<span class="class-name">String</span>[] names;</code></pre>
+
+                <h3>Array Initialization</h3>
+                <pre><code><span class="keyword">int</span>[] numbers = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];
+<span class="keyword">int</span>[] numbers2 = {<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>};
+<span class="keyword">int</span>[] numbers3 = <span class="keyword">new</span> <span class="keyword">int</span>[]{<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>};</code></pre>
+
+                <h3>Are Arrays Mutable?</h3>
+                <p><strong>Yes,</strong> arrays are <strong>mutable</strong> - you can change their elements.</p>
+
+                <pre><code><span class="keyword">int</span>[] numbers = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>};
+numbers[<span class="number">0</span>] = <span class="number">10</span>;  <span class="comment">// Modifying</span></code></pre>
+
+                <p><strong>Important:</strong> You <strong>cannot change the array's size</strong> after creation.</p>
+            </div>
+
+            <!-- Section 4 -->
+            <div class="section" id="section4">
+                <h2>4. Object-Oriented Programming (OOP)</h2>
+
+                <p>Java OOP is built on <strong>four pillars</strong>: Encapsulation, Inheritance, Abstraction, and Polymorphism.</p>
+
+                <h3>1. Encapsulation</h3>
+                <p><strong>Definition:</strong> Wrapping data (variables) and code (methods) together. Variables are kept private and accessed through public getter/setter methods.</p>
+
+                <pre><code><span class="keyword">class</span> <span class="class-name">Person</span> {
+    <span class="keyword">private</span> <span class="class-name">String</span> name;
+    <span class="keyword">private</span> <span class="keyword">int</span> age;
+
+    <span class="keyword">public</span> <span class="class-name">String</span> <span class="method">getName</span>() {
+        <span class="keyword">return</span> name;
+    }
+
+    <span class="keyword">public void</span> <span class="method">setName</span>(<span class="class-name">String</span> name) {
+        <span class="keyword">this</span>.name = name;
+    }
+}</code></pre>
+
+                <h3>2. Inheritance</h3>
+                <p><strong>Definition:</strong> One class (child) acquires properties and methods from another class (parent).</p>
+
+                <pre><code><span class="keyword">class</span> <span class="class-name">Animal</span> {
+    <span class="keyword">void</span> <span class="method">eat</span>() { }
+}
+
+<span class="keyword">class</span> <span class="class-name">Dog</span> <span class="keyword">extends</span> <span class="class-name">Animal</span> {
+    <span class="keyword">void</span> <span class="method">bark</span>() { }
+}</code></pre>
+
+                <h3>3. Abstraction</h3>
+                <p><strong>Definition:</strong> Hiding complex implementation details and showing only essential features.</p>
+
+                <h3>4. Polymorphism</h3>
+                <p>Covered in next section with detailed examples.</p>
+            </div>
+
+            <!-- Section 5: Polymorphism -->
+            <div class="section" id="section5">
+                <h2>5. Polymorphism (Overloading & Overriding)</h2>
+
+                <p><strong>Definition:</strong> Ability of an object to take many forms. Two types: <strong>Compile-time</strong> (Overloading) and <strong>Runtime</strong> (Overriding).</p>
+
+                <h3>1. Method Overloading (Compile-time Polymorphism)</h3>
+                <p><strong>Definition:</strong> Multiple methods with the <strong>same name</strong> but <strong>different parameters</strong> (number, type, or order).</p>
+
+                <h4>Example 1: Different Number of Parameters</h4>
+                <pre><code><span class="keyword">class</span> <span class="class-name">Calculator</span> {
+    <span class="comment">// Method 1: Two int parameters</span>
+    <span class="keyword">public int</span> <span class="method">add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b) {
+        <span class="keyword">return</span> a + b;
+    }
+    
+    <span class="comment">// Method 2: Three int parameters</span>
+    <span class="keyword">public int</span> <span class="method">add</span>(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c) {
+        <span class="keyword">return</span> a + b + c;
+    }
+    
+    <span class="comment">// Method 3: Two double parameters</span>
+    <span class="keyword">public double</span> <span class="method">add</span>(<span class="keyword">double</span> a, <span class="keyword">double</span> b) {
+        <span class="keyword">return</span> a + b;
+    }
+}
+
+<span class="keyword">public class</span> <span class="class-name">Main</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
+        <span class="class-name">Calculator</span> calc = <span class="keyword">new</span> <span class="class-name">Calculator</span>();
+        
+        <span class="class-name">System</span>.out.println(calc.<span class="method">add</span>(<span class="number">5</span>, <span class="number">10</span>));        <span class="comment">// Calls Method 1: 15</span>
+        <span class="class-name">System</span>.out.println(calc.<span class="method">add</span>(<span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>));   <span class="comment">// Calls Method 2: 30</span>
+        <span class="class-name">System</span>.out.println(calc.<span class="method">add</span>(<span class="number">5.5</span>, <span class="number">10.2</span>));   <span class="comment">// Calls Method 3: 15.7</span>
+    }
+}</code></pre>
+
+                <h4>Example 2: Different Parameter Order</h4>
+                <pre><code><span class="keyword">class</span> <span class="class-name">StringProcessor</span> {
+    <span class="keyword">public</span> <span class="class-name">String</span> <span class="method">combine</span>(<span class="class-name">String</span> a, <span class="keyword">int</span> b) {
+        <span class="keyword">return</span> a + b;
+    }
+    
+    <span class="keyword">public</span> <span class="class-name">String</span> <span class="method">combine</span>(<span class="keyword">int</span> a, <span class="class-name">String</span> b) {
+        <span class="keyword">return</span> a + b;
+    }
+}
+
+<span class="class-name">StringProcessor</span> sp = <span class="keyword">new</span> <span class="class-name">StringProcessor</span>();
+<span class="class-name">System</span>.out.println(sp.<span class="method">combine</span>(<span class="string">"Value: "</span>, <span class="number">10</span>));  <span class="comment">// Value: 10</span>
+<span class="class-name">System</span>.out.println(sp.<span class="method">combine</span>(<span class="number">10</span>, <span class="string">" is the value"</span>));  <span class="comment">// 10 is the value</span></code></pre>
+
+                <div class="note">
+                    <strong>📌 Key Points about Overloading:</strong>
+                    <ul>
+                        <li>Resolved at <strong>compile time</strong></li>
+                        <li>Return type <strong>CANNOT</strong> be different (must differ in parameters)</li>
+                        <li>Parameters must differ in <strong>number, type, or order</strong></li>
+                        <li>Can have different access modifiers and exceptions</li>
+                    </ul>
+                </div>
+
+                <h3>2. Method Overriding (Runtime Polymorphism)</h3>
+                <p><strong>Definition:</strong> Child class provides a <strong>specific implementation</strong> of a method that is already defined in its parent class.</p>
+
+                <h4>Example</h4>
+                <pre><code><span class="keyword">class</span> <span class="class-name">Animal</span> {
+    <span class="keyword">void</span> <span class="method">makeSound</span>() {
+        <span class="class-name">System</span>.out.println(<span class="string">"Some generic sound"</span>);
+    }
+}
+
+<span class="keyword">class</span> <span class="class-name">Dog</span> <span class="keyword">extends</span> <span class="class-name">Animal</span> {
+    @Override
+    <span class="keyword">void</span> <span class="method">makeSound</span>() {
+        <span class="class-name">System</span>.out.println(<span class="string">"Woof!"</span>);
+    }
+}
+
+<span class="keyword">class</span> <span class="class-name">Cat</span> <span class="keyword">extends</span> <span class="class-name">Animal</span> {
+    @Override
+    <span class="keyword">void</span> <span class="method">makeSound</span>() {
+        <span class="class-name">System</span>.out.println(<span class="string">"Meow!"</span>);
+    }
+}
+
+<span class="keyword">public class</span> <span class="class-name">Main</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
+        <span class="class-name">Animal</span> dog = <span class="keyword">new</span> <span class="class-name">Dog</span>();      <span class="comment">// Parent reference, child object</span>
+        <span class="class-name">Animal</span> cat = <span class="keyword">new</span> <span class="class-name">Cat</span>();
+        
+        dog.<span class="method">makeSound</span>();  <span class="comment">// Output: Woof! (Runtime decision)</span>
+        cat.<span class="method">makeSound</span>();  <span class="comment">// Output: Meow! (Runtime decision)</span>
+    }
+}</code></pre>
+
+                <div class="note">
+                    <strong>📌 Key Points about Overriding:</strong>
+                    <ul>
+                        <li>Resolved at <strong>runtime</strong> (method called depends on actual object type)</li>
+                        <li>Method signature must be <strong>exactly the same</strong></li>
+                        <li>Cannot have more restrictive access modifier</li>
+                        <li>Cannot throw broader checked exceptions</li>
+                        <li>Use <code>@Override</code> annotation (recommended)</li>
+                    </ul>
+                </div>
+
+                <h3>Overloading vs Overriding</h3>
+                <table>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Overloading</th>
+                        <th>Overriding</th>
+                    </tr>
+                    <tr>
+                        <td>Type</td>
+                        <td>Compile-time</td>
+                        <td>Runtime</td>
+                    </tr>
+                    <tr>
+                        <td>Method Name</td>
+                        <td>Same</td>
+                        <td>Same</td>
+                    </tr>
+                    <tr>
+                        <td>Parameters</td>
+                        <td>Must differ</td>
+                        <td>Must be identical</td>
+                    </tr>
+                    <tr>
+                        <td>Return Type</td>
+                        <td>Can differ (but not alone)</td>
+                        <td>Same or covariant</td>
+                    </tr>
+                    <tr>
+                        <td>Inheritance</td>
+                        <td>Not required (same class)</td>
+                        <td>Required (parent-child)</td>
+                    </tr>
+                    <tr>
+                        <td>Relationship</td>
+                        <td>Horizontal</td>
+                        <td>Vertical</td>
+                    </tr>
+                </table>
+
+                <h3>Why Use Parent Reference with Child Object?</h3>
+                <p><strong>Question:</strong> Why use <code>Animal animal = new Dog()</code> instead of <code>Dog dog = new Dog()</code>?</p>
+                <p><strong>Answer:</strong> Both are valid! Parent reference enables <strong>flexibility and polymorphism</strong>.</p>
+
+                <pre><code><span class="comment">// Without polymorphism (Inflexible)</span>
+<span class="class-name">Dog</span> dog = <span class="keyword">new</span> <span class="class-name">Dog</span>();
+<span class="class-name">Cat</span> cat = <span class="keyword">new</span> <span class="class-name">Cat</span>();
+dog.<span class="method">makeSound</span>();
+cat.<span class="method">makeSound</span>();
+
+<span class="comment">// With polymorphism (Flexible)</span>
+<span class="class-name">Animal</span>[] animals = {<span class="keyword">new</span> <span class="class-name">Dog</span>(), <span class="keyword">new</span> <span class="class-name">Cat</span>()};
+<span class="keyword">for</span> (<span class="class-name">Animal</span> animal : animals) {
+    animal.<span class="method">makeSound</span>();  <span class="comment">// Calls correct method for each</span>
+}</code></pre>
+
+                <p><strong>Benefits of Polymorphism:</strong></p>
+                <ul>
+                    <li>One method works with multiple types</li>
+                    <li>Easier to add new types without changing existing code</li>
+                    <li>Loose coupling between classes</li>
+                </ul>
+            </div>
+
+            <!-- Section 6 -->
+            <div class="section" id="section6">
+                <h2>6. Abstract Classes vs Interfaces</h2>
+
+                <h3>Abstract Class</h3>
+                <p><strong>Definition:</strong> Cannot be instantiated. Can contain both abstract methods and concrete methods.</p>
+
+                <pre><code><span class="keyword">abstract class</span> <span class="class-name">Vehicle</span> {
+    <span class="class-name">String</span> brand;
+    
+    <span class="keyword">public</span> <span class="class-name">Vehicle</span>(<span class="class-name">String</span> brand) {
+        <span class="keyword">this</span>.brand = brand;
+    }
+    
+    <span class="keyword">public void</span> <span class="method">start</span>() {
+        <span class="class-name">System</span>.out.println(brand + <span class="string">" starting..."</span>);
+    }
+    
+    <span class="keyword">abstract void</span> <span class="method">accelerate</span>();
+}</code></pre>
+
+                <h3>Interface</h3>
+                <p><strong>Definition:</strong> Blueprint containing only abstract methods and constants. Defines WHAT, not HOW.</p>
+
+                <pre><code><span class="keyword">interface</span> <span class="class-name">Flyable</span> {
+    <span class="keyword">void</span> <span class="method">fly</span>();
+}
+
+<span class="keyword">interface</span> <span class="class-name">Swimmable</span> {
+    <span class="keyword">void</span> <span class="method">swim</span>();
+}
+
+<span class="keyword">class</span> <span class="class-name">Duck</span> <span class="keyword">implements</span> <span class="class-name">Flyable</span>, <span class="class-name">Swimmable</span> {
+    <span class="keyword">public void</span> <span class="method">fly</span>() { }
+    <span class="keyword">public void</span> <span class="method">swim</span>() { }
+}</code></pre>
+
+                <h3>Key Differences</h3>
+                <table>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Abstract Class</th>
+                        <th>Interface</th>
+                    </tr>
+                    <tr>
+                        <td>Inheritance</td>
+                        <td>Single (extends)</td>
+                        <td>Multiple (implements)</td>
+                    </tr>
+                    <tr>
+                        <td>Methods</td>
+                        <td>Abstract + Concrete</td>
+                        <td>Abstract only</td>
+                    </tr>
+                    <tr>
+                        <td>Constructors</td>
+                        <td>Yes</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Use Case</td>
+                        <td>"is-a" relationship</td>
+                        <td>"can-do" capability</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Section 7: Enums -->
+            <div class="section" id="section7">
+                <h2>7. Enums in Java</h2>
+
+                <p><strong>Definition:</strong> A special data type that allows you to define a set of constants (fixed values). Enums restrict variables to only predefined values.</p>
+
+                <h3>Why Use Enums?</h3>
+                <ul>
+                    <li>Restrict variables to a fixed set of values</li>
+                    <li>Improve code readability and maintainability</li>
+                    <li>Prevent invalid values</li>
+                    <li>Type-safe way to handle constants</li>
+                </ul>
+
+                <h3>Basic Enum Definition</h3>
+                <pre><code><span class="keyword">enum</span> <span class="class-name">Day</span> {
+    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+}
+
+<span class="keyword">public class</span> <span class="class-name">Main</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
+        <span class="class-name">Day</span> today = <span class="class-name">Day</span>.MONDAY;
+        <span class="class-name">System</span>.out.println(today);  <span class="comment">// Output: MONDAY</span>
+    }
+}</code></pre>
+
+                <h3>Enum with Methods and Properties</h3>
+                <pre><code><span class="keyword">enum</span> <span class="class-name">Status</span> {
+    PENDING(<span class="string">"Pending"</span>, <span class="number">1</span>),
+    ACTIVE(<span class="string">"Active"</span>, <span class="number">2</span>),
+    INACTIVE(<span class="string">"Inactive"</span>, <span class="number">3</span>);
+    
+    <span class="class-name">String</span> displayName;
+    <span class="keyword">int</span> code;
+    
+    <span class="comment">// Constructor (must be private)</span>
+    <span class="class-name">Status</span>(<span class="class-name">String</span> displayName, <span class="keyword">int</span> code) {
+        <span class="keyword">this</span>.displayName = displayName;
+        <span class="keyword">this</span>.code = code;
+    }
+    
+    <span class="keyword">public</span> <span class="class-name">String</span> <span class="method">getDisplayName</span>() {
+        <span class="keyword">return</span> displayName;
+    }
+    
+    <span class="keyword">public int</span> <span class="method">getCode</span>() {
+        <span class="keyword">return</span> code;
+    }
+}
+
+<span class="keyword">public class</span> <span class="class-name">Main</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
+        <span class="class-name">Status</span> status = <span class="class-name">Status</span>.ACTIVE;
+        <span class="class-name">System</span>.out.println(status.<span class="method">getDisplayName</span>());  <span class="comment">// Output: Active</span>
+        <span class="class-name">System</span>.out.println(status.<span class="method">getCode</span>());           <span class="comment">// Output: 2</span>
+    }
+}</code></pre>
+
+                <h3>Iterating Over Enum Values</h3>
+                <pre><code><span class="keyword">for</span> (<span class="class-name">Day</span> day : <span class="class-name">Day</span>.<span class="keyword">values</span>()) {
+    <span class="class-name">System</span>.out.println(day);
+}</code></pre>
+
+                <h3>Enum in Switch Statements</h3>
+                <pre><code><span class="class-name">Status</span> status = <span class="class-name">Status</span>.ACTIVE;
+
+<span class="keyword">switch</span> (status) {
+    <span class="keyword">case</span> PENDING:
+        <span class="class-name">System</span>.out.println(<span class="string">"Waiting for approval"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> ACTIVE:
+        <span class="class-name">System</span>.out.println(<span class="string">"Currently active"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> INACTIVE:
+        <span class="class-name">System</span>.out.println(<span class="string">"No longer active"</span>);
+        <span class="keyword">break</span>;
+}</code></pre>
+
+                <div class="note">
+                    <strong>📌 Enum Best Practices:</strong>
+                    <ul>
+                        <li>Use enums for fixed sets of constants</li>
+                        <li>Enum constants are public, static, final by default</li>
+                        <li>Constructors must be private</li>
+                        <li>Perfect for status codes, options, and choices</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 8 -->
+            <div class="section" id="section8">
+                <h2>8. Data Types</h2>
+
+                <h3>Primitive Data Types (8 Types)</h3>
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Size</th>
+                        <th>Range</th>
+                        <th>Default</th>
+                    </tr>
+                    <tr>
+                        <td>byte</td>
+                        <td>1 byte</td>
+                        <td>-128 to 127</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>short</td>
+                        <td>2 bytes</td>
+                        <td>-32,768 to 32,767</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>int</td>
+                        <td>4 bytes</td>
+                        <td>-2³¹ to 2³¹-1</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>long</td>
+                        <td>8 bytes</td>
+                        <td>-2⁶³ to 2⁶³-1</td>
+                        <td>0L</td>
+                    </tr>
+                    <tr>
+                        <td>float</td>
+                        <td>4 bytes</td>
+                        <td>~6-7 decimal digits</td>
+                        <td>0.0f</td>
+                    </tr>
+                    <tr>
+                        <td>double</td>
+                        <td>8 bytes</td>
+                        <td>~15-16 decimal digits</td>
+                        <td>0.0d</td>
+                    </tr>
+                    <tr>
+                        <td>boolean</td>
+                        <td>1 bit</td>
+                        <td>true/false</td>
+                        <td>false</td>
+                    </tr>
+                    <tr>
+                        <td>char</td>
+                        <td>2 bytes</td>
+                        <td>0 to 65,535 (Unicode)</td>
+                        <td>'\u0000'</td>
+                    </tr>
+                </table>
+
+                <h3>Non-Primitive Types</h3>
+                <p>String, Arrays, Classes, Interfaces - all store <strong>references</strong> to objects.</p>
+
+                <h3>Primitive vs Non-Primitive</h3>
+                <table>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Primitive</th>
+                        <th>Non-Primitive</th>
+                    </tr>
+                    <tr>
+                        <td>Definition</td>
+                        <td>Built-in by Java</td>
+                        <td>Created by programmer</td>
+                    </tr>
+                    <tr>
+                        <td>Stores</td>
+                        <td>Actual value</td>
+                        <td>Reference to object</td>
+                    </tr>
+                    <tr>
+                        <td>Memory</td>
+                        <td>Stack</td>
+                        <td>Heap</td>
+                    </tr>
+                    <tr>
+                        <td>Can be null?</td>
+                        <td>No</td>
+                        <td>Yes</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Section 9 -->
+            <div class="section" id="section9">
+                <h2>9. Wrapper Classes</h2>
+
+                <h3>What are Wrapper Classes?</h3>
+                <p><strong>Definition:</strong> Classes that convert <strong>primitive types into objects</strong> (reference types).</p>
+
+                <table>
+                    <tr>
+                        <th>Primitive</th>
+                        <th>Wrapper</th>
+                    </tr>
+                    <tr><td>byte</td><td>Byte</td></tr>
+                    <tr><td>short</td><td>Short</td></tr>
+                    <tr><td>int</td><td>Integer</td></tr>
+                    <tr><td>long</td><td>Long</td></tr>
+                    <tr><td>float</td><td>Float</td></tr>
+                    <tr><td>double</td><td>Double</td></tr>
+                    <tr><td>boolean</td><td>Boolean</td></tr>
+                    <tr><td>char</td><td>Character</td></tr>
+                </table>
+
+                <h3>Autoboxing & Unboxing</h3>
+                <pre><code><span class="comment">// Autoboxing: primitive to wrapper</span>
+<span class="class-name">Integer</span> num = <span class="number">10</span>;
+
+<span class="comment">// Unboxing: wrapper to primitive</span>
+<span class="keyword">int</span> value = num;</code></pre>
+
+                <h3>Collections with Wrappers</h3>
+                <pre><code><span class="class-name">ArrayList</span>&lt;<span class="class-name">Integer</span>&gt; list = <span class="keyword">new</span> <span class="class-name">ArrayList</span>&lt;&gt;();
+list.<span class="method">add</span>(<span class="number">10</span>);  <span class="comment">// Autoboxing</span></code></pre>
+            </div>
+
+            <!-- Section 10 -->
+            <div class="section" id="section10">
+                <h2>10. Strings and Mutability</h2>
+
+                <h3>Are Strings Mutable?</h3>
+                <p><strong>Answer: IMMUTABLE</strong> - Once created, content cannot be changed.</p>
+
+                <pre><code><span class="class-name">String</span> str = <span class="string">"Hello"</span>;
+str = str + <span class="string">" World"</span>;  <span class="comment">// Creates NEW String</span></code></pre>
+
+                <h3>Are Arrays Mutable?</h3>
+                <p><strong>Answer: MUTABLE</strong> - You can change elements, but not size.</p>
+
+                <pre><code><span class="keyword">int</span>[] arr = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>};
+arr[<span class="number">0</span>] = <span class="number">10</span>;  <span class="comment">// Allowed</span></code></pre>
+            </div>
+
+            <!-- Section 11: Errors & Exceptions -->
+            <div class="section" id="section11">
+                <h2>11. Errors & Exceptions - In Depth</h2>
+
+                <h3>Difference Between Error and Exception</h3>
+                <table>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Error</th>
+                        <th>Exception</th>
+                    </tr>
+                    <tr>
+                        <td>Definition</td>
+                        <td>Serious problem JVM cannot handle</td>
+                        <td>Program runtime issue, can be handled</td>
+                    </tr>
+                    <tr>
+                        <td>Recovery</td>
+                        <td>Not recoverable</td>
+                        <td>Recoverable with try-catch</td>
+                    </tr>
+                    <tr>
+                        <td>Examples</td>
+                        <td>OutOfMemoryError, StackOverflowError</td>
+                        <td>IOException, NumberFormatException</td>
+                    </tr>
+                    <tr>
+                        <td>Handling</td>
+                        <td>Cannot catch/handle</td>
+                        <td>Can catch/handle with try-catch-finally</td>
+                    </tr>
+                </table>
+
+                <h3>Exception Hierarchy</h3>
+                <pre><code>Throwable
+    ├── Error (Not handled)
+    │   ├── OutOfMemoryError
+    │   ├── StackOverflowError
+    │   └── VirtualMachineError
+    │
+    └── Exception (Can be handled)
+        ├── Checked Exceptions
+        │   ├── IOException
+        │   ├── FileNotFoundException
+        │   └── SQLException
+        │
+        └── Unchecked Exceptions (RuntimeException)
+            ├── NullPointerException
+            ├── ArithmeticException
+            ├── ArrayIndexOutOfBoundsException
+            └── NumberFormatException</code></pre>
+
+                <h3>Checked vs Unchecked Exceptions</h3>
+                <table>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Checked</th>
+                        <th>Unchecked</th>
+                    </tr>
+                    <tr>
+                        <td>Detection</td>
+                        <td>Compile time</td>
+                        <td>Runtime</td>
+                    </tr>
+                    <tr>
+                        <td>Handling Required</td>
+                        <td>Yes (try-catch or throws)</td>
+                        <td>Not required (but recommended)</td>
+                    </tr>
+                    <tr>
+                        <td>Parent Class</td>
+                        <td>Exception</td>
+                        <td>RuntimeException</td>
+                    </tr>
+                    <tr>
+                        <td>Examples</td>
+                        <td>IOException, SQLException</td>
+                        <td>NullPointerException, ArithmeticException</td>
+                    </tr>
+                </table>
+
+                <h3>Try-Catch-Finally Execution Flow</h3>
+                <p><strong>Key Question:</strong> When an exception is caught, does remaining code execute or stop?</p>
+
+                <p><strong>Answer:</strong></p>
+                <ul>
+                    <li>Remaining code in <strong>try block is SKIPPED</strong> (after exception)</li>
+                    <li><strong>Catch block EXECUTES</strong></li>
+                    <li><strong>Finally block ALWAYS executes</strong> (even if exception occurs)</li>
+                    <li>Code <strong>AFTER try-catch-finally CONTINUES</strong> normally</li>
+                </ul>
+
+                <h3>Detailed Example</h3>
+                <pre><code><span class="keyword">public class</span> <span class="class-name">ExceptionDemo</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
+        <span class="class-name">System</span>.out.println(<span class="string">"1. Start"</span>);
+        
+        <span class="keyword">try</span> {
+            <span class="class-name">System</span>.out.println(<span class="string">"2. Inside try"</span>);
+            <span class="keyword">int</span> result = <span class="number">10</span> / <span class="number">0</span>;  <span class="comment">// Exception occurs</span>
+            <span class="class-name">System</span>.out.println(<span class="string">"3. SKIPPED - won't execute"</span>);
+        } <span class="keyword">catch</span> (<span class="class-name">ArithmeticException</span> e) {
+            <span class="class-name">System</span>.out.println(<span class="string">"4. Caught: "</span> + e.<span class="method">getMessage</span>());
+        } <span class="keyword">finally</span> {
+            <span class="class-name">System</span>.out.println(<span class="string">"5. Finally - ALWAYS executes"</span>);
+        }
+        
+        <span class="class-name">System</span>.out.println(<span class="string">"6. After try-catch-finally"</span>);
+    }
+}</code></pre>
+
+                <p><strong>Output:</strong></p>
+                <pre><code>1. Start
+2. Inside try
+4. Caught: / by zero
+5. Finally - ALWAYS executes
+6. After try-catch-finally</code></pre>
+
+                <h3>Multiple Catch Blocks</h3>
+                <pre><code><span class="keyword">try</span> {
+    <span class="comment">// code that might throw exceptions</span>
+} <span class="keyword">catch</span> (<span class="class-name">ArithmeticException</span> e) {
+    <span class="class-name">System</span>.out.println(<span class="string">"Arithmetic error"</span>);
+} <span class="keyword">catch</span> (<span class="class-name">ArrayIndexOutOfBoundsException</span> e) {
+    <span class="class-name">System</span>.out.println(<span class="string">"Array index error"</span>);
+} <span class="keyword">catch</span> (<span class="class-name">Exception</span> e) {
+    <span class="class-name">System</span>.out.println(<span class="string">"Generic error"</span>);
+} <span class="keyword">finally</span> {
+    <span class="class-name">System</span>.out.println(<span class="string">"Cleanup code"</span>);
+}</code></pre>
+
+                <div class="note">
+                    <strong>📌 Exception Handling Best Practices:</strong>
+                    <ul>
+                        <li>Catch specific exceptions first, generic last</li>
+                        <li>Always use finally for cleanup (closing files, resources)</li>
+                        <li>Don't leave catch blocks empty</li>
+                        <li>Log exceptions for debugging</li>
+                        <li>Use try-with-resources for auto-closing resources</li>
+                    </ul>
+                </div>
+
+                <h3>Common Exceptions & Their Causes</h3>
+                <table>
+                    <tr>
+                        <th>Exception</th>
+                        <th>Cause</th>
+                        <th>Type</th>
+                    </tr>
+                    <tr>
+                        <td>NullPointerException</td>
+                        <td>Accessing null reference</td>
+                        <td>Unchecked</td>
+                    </tr>
+                    <tr>
+                        <td>ArrayIndexOutOfBoundsException</td>
+                        <td>Invalid array index</td>
+                        <td>Unchecked</td>
+                    </tr>
+                    <tr>
+                        <td>ArithmeticException</td>
+                        <td>Division by zero</td>
+                        <td>Unchecked</td>
+                    </tr>
+                    <tr>
+                        <td>NumberFormatException</td>
+                        <td>Invalid String to number</td>
+                        <td>Unchecked</td>
+                    </tr>
+                    <tr>
+                        <td>IOException</td>
+                        <td>Input/output error</td>
+                        <td>Checked</td>
+                    </tr>
+                    <tr>
+                        <td>FileNotFoundException</td>
+                        <td>File not found</td>
+                        <td>Checked</td>
+                    </tr>
+                </table>
+
+                <h3>Throws Keyword</h3>
+                <p><strong>Definition:</strong> Declares that a method might throw an exception. Caller must handle it.</p>
+
+                <pre><code><span class="keyword">public void</span> <span class="method">readFile</span>(<span class="class-name">String</span> filename) <span class="keyword">throws</span> <span class="class-name">IOException</span> {
+    <span class="class-name">FileReader</span> fr = <span class="keyword">new</span> <span class="class-name">FileReader</span>(filename);
+    <span class="comment">// Caller must handle IOException</span>
+}</code></pre>
+
+                <h3>Try-With-Resources</h3>
+                <p><strong>Auto-closes resources</strong> (files, connections) automatically.</p>
+
+                <pre><code><span class="keyword">try</span> (<span class="class-name">FileReader</span> fr = <span class="keyword">new</span> <span class="class-name">FileReader</span>(<span class="string">"file.txt"</span>)) {
+    <span class="comment">// File automatically closed after try block</span>
+} <span class="keyword">catch</span> (<span class="class-name">IOException</span> e) {
+    <span class="class-name">System</span>.out.println(<span class="string">"Error: "</span> + e.<span class="method">getMessage</span>());
+}</code></pre>
+            </div>
+
+            <!-- Section 12: File Handling -->
+            <div class="section" id="section12">
+                <h2>12. File Handling in Java</h2>
+
+                <h3>Why File Handling?</h3>
+                <p>File handling is essential for reading, writing, and manipulating files. Important for SDET as test data often comes from files.</p>
+
+                <h3>File Class</h3>
+                <p><strong>Definition:</strong> Represents a file or directory path (both exist).</p>
+
+                <pre><code><span class="keyword">import</span> java.io.File;
+
+<span class="keyword">public class</span> <span class="class-name">FileDemo</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
+        <span class="class-name">File</span> file = <span class="keyword">new</span> <span class="class-name">File</span>(<span class="string">"test.txt"</span>);
+        
+        <span class="class-name">System</span>.out.println(<span class="string">"Exists: "</span> + file.<span class="method">exists</span>());
+        <span class="class-name">System</span>.out.println(<span class="string">"Is File: "</span> + file.<span class="method">isFile</span>());
+        <span class="class-name">System</span>.out.println(<span class="string">"Is Directory: "</span> + file.<span class="method">isDirectory</span>());
+        <span class="class-name">System</span>.out.println(<span class="string">"Path: "</span> + file.<span class="method">getAbsolutePath</span>());
+        <span class="class-name">System</span>.out.println(<span class="string">"Size: "</span> + file.<span class="method">length</span>() + <span class="string">" bytes"</span>);
+    }
+}</code></pre>
+
+                <h3>Reading Files</h3>
+
+                <h4>Method 1: Using FileReader and BufferedReader</h4>
+                <pre><code><span class="keyword">import</span> java.io.*;
+
+<span class="keyword">public class</span> <span class="class-name">ReadFileDemo</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
+        <span class="keyword">try</span> (<span class="class-name">BufferedReader</span> br = <span class="keyword">new</span> <span class="class-name">BufferedReader</span>(
+                <span class="keyword">new</span> <span class="class-name">FileReader</span>(<span class="string">"test.txt"</span>))) {
+            
+            <span class="class-name">String</span> line;
+            <span class="keyword">while</span> ((line = br.<span class="method">readLine</span>()) != <span class="keyword">null</span>) {
+                <span class="class-name">System</span>.out.println(line);
+            }
+        } <span class="keyword">catch</span> (<span class="class-name">IOException</span> e) {
+            <span class="class-name">System</span>.out.println(<span class="string">"Error reading file: "</span> + e.<span class="method">getMessage</span>());
+        }
+    }
+}</code></pre>
+
+                <h4>Method 2: Using Scanner</h4>
+                <pre><code><span class="keyword">import</span> java.io.*;
+<span class="keyword">import</span> java.util.Scanner;
+
+<span class="keyword">public class</span> <span class="class-name">ReadWithScanner</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
+        <span class="keyword">try</span> (<span class="class-name">Scanner</span> scanner = <span class="keyword">new</span> <span class="class-name">Scanner</span>(
+                <span class="keyword">new</span> <span class="class-name">File</span>(<span class="string">"test.txt"</span>))) {
+            
+            <span class="keyword">while</span> (scanner.<span class="method">hasNextLine</span>()) {
+                <span class="class-name">String</span> line = scanner.<span class="method">nextLine</span>();
+                <span class="class-name">System</span>.out.println(line);
+            }
+        } <span class="keyword">catch</span> (<span class="class-name">FileNotFoundException</span> e) {
+            <span class="class-name">System</span>.out.println(<span class="string">"File not found: "</span> + e.<span class="method">getMessage</span>());
+        }
+    }
+}</code></pre>
+
+                <h4>Method 3: Using Files.readAllLines (Java NIO)</h4>
+                <pre><code><span class="keyword">import</span> java.nio.file.*;
+<span class="keyword">import</span> java.util.List;
+
+<span class="keyword">public class</span> <span class="class-name">ReadWithNIO</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
+        <span class="keyword">try</span> {
+            <span class="class-name">List</span>&lt;<span class="class-name">String</span>&gt; lines = <span class="class-name">Files</span>.<span class="method">readAllLines</span>(
+                <span class="class-name">Paths</span>.<span class="method">get</span>(<span class="string">"test.txt"</span>));
+            
+            <span class="keyword">for</span> (<span class="class-name">String</span> line : lines) {
+                <span class="class-name">System</span>.out.println(line);
+            }
+        } <span class="keyword">catch</span> (<span class="class-name">IOException</span> e) {
+            <span class="class-name">System</span>.out.println(<span class="string">"Error: "</span> + e.<span class="method">getMessage</span>());
+        }
+    }
+}</code></pre>
+
+                <h3>Writing Files</h3>
+
+                <h4>Method 1: Using FileWriter and BufferedWriter</h4>
+                <pre><code><span class="keyword">import</span> java.io.*;
+
+<span class="keyword">public class</span> <span class="class-name">WriteFileDemo</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
+        <span class="keyword">try</span> (<span class="class-name">BufferedWriter</span> bw = <span class="keyword">new</span> <span class="class-name">BufferedWriter</span>(
+                <span class="keyword">new</span> <span class="class-name">FileWriter</span>(<span class="string">"output.txt"</span>))) {
+            
+            bw.<span class="method">write</span>(<span class="string">"Hello, World!"</span>);
+            bw.<span class="method">newLine</span>();
+            bw.<span class="method">write</span>(<span class="string">"This is line 2"</span>);
+            
+        } <span class="keyword">catch</span> (<span class="class-name">IOException</span> e) {
+            <span class="class-name">System</span>.out.println(<span class="string">"Error writing file: "</span> + e.<span class="method">getMessage</span>());
+        }
+    }
+}</code></pre>
+
+                <h4>Method 2: Using Files.write (Java NIO)</h4>
+                <pre><code><span class="keyword">import</span> java.nio.file.*;
+
+<span class="keyword">public class</span> <span class="class-name">WriteWithNIO</span> {
+    <span class="keyword">public static void</span> <span class="method">main</span>(<span class="class-name">String</span>[] args) {
+        <span class="keyword">try</span> {
+            <span class="class-name">String</span> content = <span class="string">"Hello, World!"</span>;
+            <span class="class-name">Files</span>.<span class="method">write</span>(<span class="class-name">Paths</span>.<span class="method">get</span>(<span class="string">"output.txt"</span>), 
+                    content.<span class="method">getBytes</span>());
+            <span class="class-name">System</span>.out.println(<span class="string">"File written successfully!"</span>);
+        } <span class="keyword">catch</span> (<span class="class-name">IOException</span> e) {
+            <span class="class-name">System</span>.out.println(<span class="string">"Error: "</span> + e.<span class="method">getMessage</span>());
+        }
+    }
+}</code></pre>
+
+                <h3>Appending to Files</h3>
+                <pre><code><span class="keyword">try</span> (<span class="class-name">BufferedWriter</span> bw = <span class="keyword">new</span> <span class="class-name">BufferedWriter</span>(
+                <span class="keyword">new</span> <span class="class-name">FileWriter</span>(<span class="string">"output.txt"</span>, <span class="keyword">true</span>))) {
+            <span class="comment">// true = append mode</span>
+            bw.<span class="method">newLine</span>();
+            bw.<span class="method">write</span>(<span class="string">"Appended content"</span>);
+        } <span class="keyword">catch</span> (<span class="class-name">IOException</span> e) {
+            e.<span class="method">printStackTrace</span>();
+        }</code></pre>
+
+                <h3>Common File Operations</h3>
+                <table>
+                    <tr>
+                        <th>Operation</th>
+                        <th>Method</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td>Create File</td>
+                        <td>file.createNewFile()</td>
+                        <td><code>new File("test.txt").createNewFile();</code></td>
+                    </tr>
+                    <tr>
+                        <td>Delete File</td>
+                        <td>file.delete()</td>
+                        <td><code>new File("test.txt").delete();</code></td>
+                    </tr>
+                    <tr>
+                        <td>Check Exists</td>
+                        <td>file.exists()</td>
+                        <td><code>file.exists()</code></td>
+                    </tr>
+                    <tr>
+                        <td>Get Path</td>
+                        <td>file.getAbsolutePath()</td>
+                        <td><code>file.getAbsolutePath()</code></td>
+                    </tr>
+                    <tr>
+                        <td>Get Size</td>
+                        <td>file.length()</td>
+                        <td><code>file.length()</code></td>
+                    </tr>
+                </table>
+
+                <div class="note">
+                    <strong>📌 File Handling for SDET:</strong>
+                    <ul>
+                        <li>Read test data from CSV/JSON/Excel files</li>
+                        <li>Write test results to output files</li>
+                        <li>Always use try-with-resources for auto-closing</li>
+                        <li>Handle FileNotFoundException and IOException</li>
+                        <li>Prefer Files.readAllLines() for simplicity</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 13: Collections -->
+            <div class="section" id="section13">
+                <h2>13. Collections Framework - In Depth</h2>
+
+                <p><strong>Definition:</strong> Unified architecture of classes and interfaces to store and manipulate groups of objects efficiently.</p>
+
+                <h3>Collections Hierarchy</h3>
+                <pre><code>Collection
+    ├── List (ordered, allows duplicates)
+    │   ├── ArrayList
+    │   ├── LinkedList
+    │   └── Vector
+    │
+    ├── Set (unique elements)
+    │   ├── HashSet
+    │   ├── TreeSet
+    │   └── LinkedHashSet
+    │
+    └── Queue (FIFO)
+        ├── PriorityQueue
+        └── LinkedList
+
+Map (separate hierarchy)
+    ├── HashMap
+    ├── TreeMap
+    ├── LinkedHashMap
+    └── ConcurrentHashMap</code></pre>
+
+                <h3>List Implementation Details</h3>
+
+                <h4>ArrayList</h4>
+                <p><strong>Characteristics:</strong> Ordered, duplicates allowed, fast random access (O(1)), slower insertion/deletion</p>
+                <p><strong>Use when:</strong> Frequent reading, infrequent modifications</p>
+
+                <h4>LinkedList</h4>
+                <p><strong>Characteristics:</strong> Ordered, duplicates allowed, slow random access (O(n)), fast insertion/deletion at ends (O(1))</p>
+                <p><strong>Use when:</strong> Frequent insertions/deletions at ends</p>
+
+                <h3>Set Implementation Details</h3>
+
+                <h4>HashSet</h4>
+                <p><strong>Characteristics:</strong> Unordered, no duplicates, O(1) operations</p>
+                <p><strong>Use when:</strong> Need unique elements, order doesn't matter</p>
+
+                <h4>TreeSet</h4>
+                <p><strong>Characteristics:</strong> Sorted, no duplicates, O(log n) operations</p>
+                <p><strong>Use when:</strong> Need sorted unique elements</p>
+
+                <h4>LinkedHashSet</h4>
+                <p><strong>Characteristics:</strong> Maintains insertion order, no duplicates, O(1) operations</p>
+
+                <h3>Map Implementation Details</h3>
+
+                <h4>HashMap</h4>
+                <p><strong>Characteristics:</strong> Unordered, unique keys, O(1) operations, allows null key</p>
+
+                <h4>TreeMap</h4>
+                <p><strong>Characteristics:</strong> Sorted by keys, unique keys, O(log n) operations</p>
+
+                <h4>LinkedHashMap</h4>
+                <p><strong>Characteristics:</strong> Maintains insertion order, unique keys</p>
+
+                <h4>ConcurrentHashMap</h4>
+                <p><strong>Characteristics:</strong> Thread-safe without locking entire map, allows concurrent read/write</p>
+
+                <pre><code><span class="keyword">import</span> java.util.concurrent.ConcurrentHashMap;
+
+<span class="class-name">ConcurrentHashMap</span>&lt;<span class="class-name">String</span>, <span class="class-name">String</span>&gt; map = 
+    <span class="keyword">new</span> <span class="class-name">ConcurrentHashMap</span>&lt;&gt;();
+map.<span class="method">put</span>(<span class="string">"key1"</span>, <span class="string">"value1"</span>);</code></pre>
+
+                <h3>Collection Comparison</h3>
+                <table>
+                    <tr>
+                        <th>Collection</th>
+                        <th>Duplicates</th>
+                        <th>Ordered</th>
+                        <th>Sorted</th>
+                        <th>Access</th>
+                    </tr>
+                    <tr>
+                        <td>ArrayList</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                        <td>No</td>
+                        <td>O(1)</td>
+                    </tr>
+                    <tr>
+                        <td>LinkedList</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                        <td>No</td>
+                        <td>O(n)</td>
+                    </tr>
+                    <tr>
+                        <td>HashSet</td>
+                        <td>No</td>
+                        <td>No</td>
+                        <td>No</td>
+                        <td>O(1)</td>
+                    </tr>
+                    <tr>
+                        <td>TreeSet</td>
+                        <td>No</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                        <td>O(log n)</td>
+                    </tr>
+                    <tr>
+                        <td>HashMap</td>
+                        <td>No (keys)</td>
+                        <td>No</td>
+                        <td>No</td>
+                        <td>O(1)</td>
+                    </tr>
+                    <tr>
+                        <td>TreeMap</td>
+                        <td>No (keys)</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                        <td>O(log n)</td>
+                    </tr>
+                </table>
+
+                <h3>Practical Examples for SDET</h3>
+
+                <h4>Reading Test Data into ArrayList</h4>
+                <pre><code><span class="keyword">import</span> java.util.*;
+<span class="keyword">import</span> java.nio.file.*;
+
+<span class="class-name">List</span>&lt;<span class="class-name">String</span>&gt; testData = <span class="class-name">Files</span>.<span class="method">readAllLines</span>(
+    <span class="class-name">Paths</span>.<span class="method">get</span>(<span class="string">"testdata.txt"</span>));
+
+<span class="keyword">for</span> (<span class="class-name">String</span> data : testData) {
+    <span class="class-name">System</span>.out.println(<span class="string">"Testing: "</span> + data);
+}</code></pre>
+
+                <h4>Storing Test Results in HashMap</h4>
+                <pre><code><span class="class-name">Map</span>&lt;<span class="class-name">String</span>, <span class="class-name">String</span>&gt; results = <span class="keyword">new</span> <span class="class-name">HashMap</span>&lt;&gt;();
+results.<span class="method">put</span>(<span class="string">"LoginTest"</span>, <span class="string">"PASSED"</span>);
+results.<span class="method">put</span>(<span class="string">"SearchTest"</span>, <span class="string">"FAILED"</span>);
+
+<span class="keyword">for</span> (<span class="class-name">Map</span>.<span class="class-name">Entry</span>&lt;<span class="class-name">String</span>, <span class="class-name">String</span>&gt; entry : results.<span class="method">entrySet</span>()) {
+    <span class="class-name">System</span>.out.println(entry.<span class="method">getKey</span>() + <span class="string">": "</span> + entry.<span class="method">getValue</span>());
+}</code></pre>
+            </div>
+
+            <!-- Section 14: Interview Questionnaire -->
+            <div class="questionnaire" id="section14">
+                <h2>14. 📋 Interview Questionnaire for SDET</h2>
+                <p>These are the most commonly asked Java questions in SDET interviews. Test your knowledge!</p>
+
+                <div class="question">
+                    <div class="question-number">Q1.</div>
+                    <div class="question-text">Explain the main differences between ArrayList and LinkedList in terms of performance and when you would use each in test automation.</div>
+                    <div class="question-hint">💡 Hint: Think about accessing elements vs inserting/deleting elements</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q2.</div>
+                    <div class="question-text">What is the difference between HashMap and ConcurrentHashMap? Why would you use ConcurrentHashMap in multi-threaded test scenarios?</div>
+                    <div class="question-hint">💡 Hint: Think about thread safety and concurrent access</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q3.</div>
+                    <div class="question-text">Write a method that reads test data from a CSV file and returns it as a List&lt;String&gt;. Handle any potential exceptions.</div>
+                    <div class="question-hint">💡 Hint: Use try-with-resources and handle FileNotFoundException</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q4.</div>
+                    <div class="question-text">Explain the difference between method overloading and method overriding. Provide practical examples relevant to test automation.</div>
+                    <div class="question-hint">💡 Hint: Overloading is compile-time, overriding is runtime</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q5.</div>
+                    <div class="question-text">Can you instantiate an abstract class or interface in Java? Why or why not?</div>
+                    <div class="question-hint">💡 Hint: Think about what abstract classes and interfaces represent</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q6.</div>
+                    <div class="question-text">What will happen if you don't use try-catch-finally in a method that opens a file? What best practice should you follow?</div>
+                    <div class="question-hint">💡 Hint: Think about resource management and memory leaks</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q7.</div>
+                    <div class="question-text">Explain the difference between checked and unchecked exceptions. Provide examples of each.</div>
+                    <div class="question-hint">💡 Hint: One is caught at compile-time, the other at runtime</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q8.</div>
+                    <div class="question-text">Why are Strings immutable in Java? What are the performance implications if you concatenate strings in a loop?</div>
+                    <div class="question-hint">💡 Hint: What gets created when you concatenate Strings?</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q9.</div>
+                    <div class="question-text">What is the purpose of wrapper classes? How does autoboxing and unboxing work?</div>
+                    <div class="question-hint">💡 Hint: How do you store primitive types in Collections?</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q10.</div>
+                    <div class="question-text">Design a test data manager class that reads test data from a file, stores it in a HashMap, and allows retrieval by test case ID.</div>
+                    <div class="question-hint">💡 Hint: Use File I/O, HashMap, and proper exception handling</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q11.</div>
+                    <div class="question-text">Write code to iterate over a HashMap in three different ways. Which is most efficient and why?</div>
+                    <div class="question-hint">💡 Hint: entrySet(), keySet(), values()</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q12.</div>
+                    <div class="question-text">What are the differences between a do-while loop and a while loop? Provide a practical SDET example.</div>
+                    <div class="question-hint">💡 Hint: When does the condition check occur?</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q13.</div>
+                    <div class="question-text">How would you use enums in test automation to represent test statuses (PENDING, RUNNING, PASSED, FAILED)?</div>
+                    <div class="question-hint">💡 Hint: Type-safe constants and switch statements</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q14.</div>
+                    <div class="question-text">What is the difference between interfaces and abstract classes? When should you use each in building a test framework?</div>
+                    <div class="question-hint">💡 Hint: Single vs multiple inheritance, "is-a" vs "can-do"</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q15.</div>
+                    <div class="question-text">Explain what polymorphism is and how it helps in building a scalable test automation framework.</div>
+                    <div class="question-hint">💡 Hint: Different drivers (Chrome, Firefox, Safari) implementing same interface</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q16.</div>
+                    <div class="question-text">What is the difference between null and empty array? How would this affect your test data handling?</div>
+                    <div class="question-hint">💡 Hint: Can you call methods on an empty array? What about null?</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q17.</div>
+                    <div class="question-text">Write a try-catch-finally block that simulates opening a database connection for test data, executing a query, and closing the connection properly.</div>
+                    <div class="question-hint">💡 Hint: Finally ensures cleanup even if exception occurs</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q18.</div>
+                    <div class="question-text">How would you read test data from a JSON file and convert it into objects? What exception might occur?</div>
+                    <div class="question-hint">💡 Hint: You might need external libraries like Gson or Jackson</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q19.</div>
+                    <div class="question-text">Explain the concept of method overloading. How can you overload a method in 3 different ways?</div>
+                    <div class="question-hint">💡 Hint: Different number, type, or order of parameters</div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Q20.</div>
+                    <div class="question-text">Why would you use TreeMap instead of HashMap for storing and retrieving test case results?</div>
+                    <div class="question-hint">💡 Hint: Sorting and ordered retrieval of test results</div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <p>✅ <strong>Java Fundamentals for SDET - Complete Interview Guide</strong></p>
+                <p>📚 Comprehensive coverage with theory, code examples, loops, enums, file handling, and detailed questionnaire</p>
+                <p style="margin-top: 20px; color: #999; font-size: 0.9em;">Created for SDET interview preparation | Complete coverage of all Java fundamentals</p>
+                <p style="margin-top: 10px; color: #999; font-size: 0.85em;"><strong>Note:</strong> Questionnaire contains 20 interview questions without answers. Use them to test your knowledge and prepare for interviews.</p>
+            </div>
+        </div>
+    </div>
+
+    <a href="#section1" class="back-to-top">↑ Top</a>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Show/hide back-to-top button
+        window.addEventListener('scroll', function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
